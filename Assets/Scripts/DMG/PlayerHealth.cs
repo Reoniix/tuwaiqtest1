@@ -50,7 +50,8 @@ public class PlayerHealth : MonoBehaviour
     //    }
     //}
 
-    public void TakeDamage(int damage, Vector3 sourcePos)  //vector3 added for knockback
+    //public void TakeDamage(int damage, Vector3 sourcePos)  //vector3 added for knockback
+    public void TakeDamage(int damage, Vector3 sourcePos, bool applyKnockback = true)
     {
         if (currentHealth <= 0)
         {
@@ -66,7 +67,10 @@ public class PlayerHealth : MonoBehaviour
 
         UpdateHealthUI();
         StartCoroutine(FlashEffect()); //dmg
-        ApplyKnockback(sourcePos); // knockback
+        //ApplyKnockback(sourcePos); // knockback to all types of damage
+
+        if (applyKnockback)
+            ApplyKnockback(sourcePos);    //knockback isnt allowed on water damage
 
         // play hit sound
         if (audioSource != null && DamageSFX != null)
