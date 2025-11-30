@@ -131,7 +131,7 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"player health: {currentHealth} from playerHealth script");
     }
 
-    void Die()
+    public void Die()
     {
         Debug.Log("Player died");
 
@@ -177,4 +177,7 @@ public class PlayerHealth : MonoBehaviour
         Time.timeScale = 1f; // unfreeze game
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // reload current scene
     }
+
+    //if the player falls under ground this makes the gameover screen show up
+    //nope didnt work
 }
