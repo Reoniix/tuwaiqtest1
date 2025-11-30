@@ -20,7 +20,26 @@ public class PlayerControl : MonoBehaviour
     public LayerMask groundMask;        
     public Collider groundCheckTrigger;
 
-    public bool canMove = true; 
+    public bool canMove = true;
+
+    //collision sfx for interacting w the world
+    [Header("Collision SFX")]
+    public AudioSource collisionAudioSource; // assign an audioSource in inspector
+    public AudioClip collisionClip;          // assign the sound i want
+
+    //called automatically when player collides with anything
+    private void OnCollisionEnter(Collision collision)
+    {
+        //skip collisions with the ground so it doesnt play all the time
+        if (((1 << collision.gameObject.layer) & groundMask) != 0)
+            return;
+
+        if (collisionAudioSource != null && collisionClip != null)
+        {
+            collisionAudioSource.PlayOneShot(collisionClip);
+        }
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
